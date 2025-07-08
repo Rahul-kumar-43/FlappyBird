@@ -150,7 +150,6 @@ def main():
                                              window_height // 2 - game_over_image.get_height() // 2 ))
                 if user_input[pygame.K_r]:
                     score = 0
-                    main()
                     break
 
         if pipe_timer <= 0 and bird.sprite.alive:
@@ -163,4 +162,22 @@ def main():
         pipe_timer -= 1    
         clock.tick(60)
         pygame.display.update()
-main()
+
+# main menu
+def main_menu():
+    global game_stopped
+    while game_stopped:
+        quit_game()
+
+        window.fill((0,0,0))
+        window.blit(skyline_image,(0,0))
+        window.blit(ground_image,(0,520))
+        window.blit(bird_images[0],(100,250))
+        window.blit(start_image,(window_width // 2  - start_image.get_width() // 2,
+                    window_height // 2 - start_image.get_height() // 2))
+        
+        user_input = pygame.key.get_pressed()
+        if user_input[pygame.K_SPACE]:
+            main()
+        pygame.display.update() 
+main_menu()
